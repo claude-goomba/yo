@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~*~ WeLcOmE 2 InVa3D ~*~ HoMe AuToMaTiOn FoR tHe InFoRmAtIoN sUpErHiGhWaY ~*~</title>
+  <style>
+    /* ~*~ 90s STYLESHEET ~*~ BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 ~*~ */
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+    @keyframes rainbow { 0%{color:#f00} 14%{color:#f70} 28%{color:#ff0} 42%{color:#0f0} 57%{color:#00f} 71%{color:#8b00ff} 85%{color:#f0f} 100%{color:#f00} }
+    @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+    @keyframes starSpin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+    @keyframes colorShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes floatUp { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-60px)} }
+
+    .blink { animation: blink 1s step-end infinite; }
+    .rainbow-text { animation: rainbow 3s linear infinite; font-weight: bold; }
+
+    body {
+      background-color: #000080;
+      background-image:
+        radial-gradient(circle, #0000aa 1px, transparent 1px),
+        radial-gradient(circle, #000099 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+      color: #0f0;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+
+    #starfield {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 9999;
+    }
+
+    .top-marquee, .bottom-marquee {
+      background: linear-gradient(90deg, #f00, #f70, #ff0, #0f0, #00f, #8b00ff, #f0f);
+      color: #000; padding: 8px 0; font-size: 18px; font-weight: bold;
+      text-shadow: 1px 1px 0 #fff;
+      border-top: 3px ridge #c0c0c0; border-bottom: 3px ridge #c0c0c0;
+    }
+
+    .main-wrapper { max-width: 960px; margin: 10px auto; padding: 10px; }
+
+    .header-section {
+      text-align: center; padding: 20px;
+      background: linear-gradient(180deg, #000033, #000066, #000099);
+      border: 4px ridge #c0c0c0; margin-bottom: 10px;
+    }
+
+    .main-title {
+      font-size: 52px; color: #f0f;
+      text-shadow: 3px 3px 0 #f00, -1px -1px 0 #0ff, 2px -2px 0 #ff0, -2px 2px 0 #0f0;
+      letter-spacing: 5px;
+    }
+
+    .subtitle { font-size: 22px; color: #ff0; text-shadow: 2px 2px 0 #f00; margin-top: 5px; }
+    .best-viewed { font-size: 11px; color: #808080; margin-top: 10px; }
+
+    .divider-line {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #f00, #f70, #ff0, #0f0, #00f, #8b00ff, #f0f, transparent);
+      margin: 10px 20px;
+    }
+
+    .nav-table { width: 100%; margin-bottom: 10px; border-color: #808080; background: #000033; }
+    .nav-cell {
+      text-align: center;
+      background: linear-gradient(180deg, #339, #006);
+      border: 3px outset #99f; padding: 8px;
+    }
+    .nav-cell:hover { background: linear-gradient(180deg, #44a, #009); border-style: inset; }
+    .nav-link { color: #0ff; text-decoration: none; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px #000; }
+    .nav-link:hover { color: #ff0; text-decoration: underline; }
+
+    .content-table { width: 100%; border-color: #808080; background: #000022; }
+
+    .sidebar { background: linear-gradient(180deg, #000033, #000011); border: 2px inset #666; }
+    .sidebar-box { padding: 5px; }
+    .sidebar-title { color: #f0f; font-size: 14px; text-align: center; margin: 8px 0 5px; text-shadow: 1px 1px 0 #808; }
+
+    .webring-nav { text-align: center; font-size: 12px; margin: 5px 0; }
+    .webring-nav a { color: #0ff; text-decoration: none; }
+    .webring-nav a:hover { color: #ff0; text-decoration: underline; }
+
+    .rainbow-hr { border: none; height: 3px; background: linear-gradient(90deg, #f00, #f70, #ff0, #0f0, #00f, #8b00ff, #f0f); margin: 10px 0; }
+
+    .stats-text { font-size: 12px; color: #aaa; text-align: center; }
+
+    .award-box { text-align: center; margin: 8px 0; }
+    .fake-award {
+      display: inline-block; width: 70px; height: 70px;
+      background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+      color: #000; font-size: 10px; font-weight: bold; text-align: center;
+      line-height: 1.3; padding: 8px 2px; border: 3px outset #ffd700;
+      border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+    }
+    .fake-award.hot { background: linear-gradient(135deg, #f00, #f60, #f00); border-color: #f00; color: #ff0; }
+
+    .button-88x31 { text-align: center; margin: 5px 0; }
+    .mini-button {
+      display: inline-block; width: 88px; height: 31px; font-size: 9px;
+      font-weight: bold; text-align: center; line-height: 1.2; padding: 2px;
+      border: 2px outset; cursor: pointer;
+    }
+    .mini-button.ie { background: linear-gradient(180deg, #0078d7, #039); color: #fff; border-color: #0078d7; }
+    .mini-button.ns { background: linear-gradient(180deg, #060, #030); color: #0f0; border-color: #090; }
+    .mini-button.free { background: linear-gradient(180deg, #333, #000); color: #0ff; border-color: #666; }
+    .mini-button.anarchy { background: linear-gradient(180deg, #c00, #600); color: #ff0; border-color: #f00; }
+    .mini-button.notepad { background: linear-gradient(180deg, #ffc, #cc9); color: #000; border-color: #cc6; }
+    .mini-button.y2k { background: linear-gradient(180deg, #f60, #c30); color: #fff; border-color: #f90; }
+    .mini-button.noframes { background: linear-gradient(180deg, #606, #303); color: #f9f; border-color: #909; }
+    .mini-button.hackers { background: linear-gradient(180deg, #0f0, #060); color: #000; border-color: #0f0; }
+    .mini-button.ha { background: linear-gradient(180deg, #03a9f4, #0277bd); color: #fff; border-color: #03a9f4; }
+
+    .main-content { background: #000044; border: 2px inset #666; padding: 10px; }
+
+    .content-box {
+      background: linear-gradient(180deg, #000033, #000022);
+      border: 3px ridge #669; padding: 15px; margin-bottom: 15px;
+    }
+
+    .section-title {
+      color: #ff0; font-size: 24px; text-align: center;
+      text-shadow: 2px 2px 0 #c60; margin-bottom: 10px;
+      border-bottom: 2px dotted #ff0; padding-bottom: 8px;
+    }
+
+    .construction-banner {
+      background: repeating-linear-gradient(45deg, #ff0, #ff0 10px, #000 10px, #000 20px);
+      padding: 10px; text-align: center; margin: 10px 0; border: 3px outset #ff0;
+    }
+    .construction-icon { font-size: 28px; color: #f00; }
+    .construction-text { font-size: 22px; color: #f00; text-shadow: 2px 2px 0 #ff0; font-weight: bold; margin: 0 10px; }
+
+    .main-content p { color: #0f0; font-size: 14px; line-height: 1.8; margin: 10px 0; }
+
+    .fire-text {
+      color: #f60; font-size: 18px; font-weight: bold;
+      text-shadow: 0 0 10px #f00, 0 0 20px #f60, 0 0 30px #ff0;
+    }
+
+    .about-table { width: 100%; border-color: #669; margin: 10px 0; }
+    .about-table td { color: #0f0; font-size: 14px; background: #000033; border-color: #336; }
+    .about-label { color: #0ff !important; font-weight: bold; width: 160px; background: #000055 !important; }
+
+    .integration-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px; margin: 10px 0;
+    }
+    .integration-card {
+      background: linear-gradient(180deg, #000055, #000033); border: 2px outset #669;
+      padding: 8px; text-align: center; font-size: 11px; color: #0ff;
+    }
+    .integration-card:hover { background: linear-gradient(180deg, #000077, #000055); border-style: inset; }
+    .integration-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+
+    .cool-links { list-style: none; padding: 0; }
+    .cool-links li { padding: 6px 0; border-bottom: 1px dotted #336; font-size: 14px; }
+    .cool-links li::before { content: ">> "; color: #ff0; }
+    .cool-links a { color: #0ff; text-decoration: underline; }
+    .cool-links a:hover { color: #f0f; background: #336; }
+
+    .new-icon { color: #f00; font-size: 12px; font-weight: bold; background: #ff0; padding: 1px 4px; }
+    .hot-icon { color: #ff0; font-size: 12px; font-weight: bold; background: #f00; padding: 1px 4px; }
+
+    .guestbook-form { margin: 10px 0; }
+    .form-table { width: 100%; border-color: #669; }
+    .form-table td { background: #000033; color: #0ff; border-color: #336; }
+    .form-label { font-weight: bold; color: #ff0 !important; width: 120px; }
+
+    .retro-input {
+      background: #000; color: #0f0; border: 2px inset #808080;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive; font-size: 13px; padding: 3px;
+    }
+    .retro-input:focus { background: #000033; outline: 1px dotted #0f0; }
+
+    .retro-button {
+      background: linear-gradient(180deg, #c0c0c0, #808080); color: #000;
+      border: 3px outset #c0c0c0; font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+      font-weight: bold; font-size: 14px; padding: 4px 15px; cursor: pointer; margin: 5px;
+    }
+    .retro-button:active { border-style: inset; background: linear-gradient(180deg, #808080, #c0c0c0); }
+
+    .gb-entry { background: #000033; border: 2px ridge #669; padding: 8px; margin: 8px 0; }
+    .gb-meta { color: #f0f; font-size: 12px; }
+    .gb-text { color: #0f0; font-size: 14px; margin-top: 4px; }
+
+    .midi-box { text-align: center; background: linear-gradient(180deg, #300, #000) !important; border-color: #900 !important; }
+    .midi-box h3 { color: #f60; }
+    .midi-name { color: #f90; font-size: 14px; }
+    .midi-controls { margin-top: 8px; }
+    .midi-btn { background: linear-gradient(180deg, #900, #600) !important; color: #f90 !important; border-color: #c00 !important; }
+
+    .counter-display { text-align: center; margin: 8px 0; background: #000; padding: 5px; border: 2px inset #333; }
+    .counter-digit {
+      display: inline-block; background: #001100; color: #0f0;
+      font-family: 'Courier New', monospace; font-size: 20px; font-weight: bold;
+      width: 22px; text-align: center; border: 1px solid #030; margin: 0 1px;
+      text-shadow: 0 0 5px #0f0;
+    }
+
+    .whats-new { list-style: none; padding: 0; }
+    .whats-new li { font-size: 11px; color: #aaa; padding: 3px 0; border-bottom: 1px dotted #333; }
+
+    .clock-display {
+      text-align: center; font-family: 'Courier New', monospace; font-size: 18px;
+      color: #0f0; background: #000; border: 2px inset #333; padding: 5px;
+      text-shadow: 0 0 8px #0f0;
+    }
+
+    .weather-box { text-align: center; font-size: 12px; color: #ff0; }
+    .weather-icon { font-size: 30px; color: #ff0; text-shadow: 0 0 10px #f60; }
+
+    .top-sites { padding-left: 20px; }
+    .top-sites li { font-size: 11px; color: #aaa; padding: 2px 0; }
+    .top-sites a { color: #0ff; font-size: 11px; }
+
+    .bottom-section {
+      text-align: center; margin-top: 10px; padding: 15px;
+      background: #000033; border: 3px ridge #669;
+    }
+
+    .webring-box { margin: 15px 0; padding: 10px; border: 2px dotted #f0f; }
+    .webring-title { font-size: 20px; margin: 5px 0; }
+    .webring-nav-bottom { margin: 10px 0; }
+    .webring-link { color: #0ff; text-decoration: none; margin: 0 8px; font-size: 14px; }
+    .webring-link:hover { color: #ff0; text-decoration: underline; }
+
+    .email-banner { margin: 10px 0; padding: 8px; border: 2px ridge #669; background: #000055; }
+    .email-banner a { color: #0ff; }
+
+    .copyright { color: #808080; font-size: 11px; margin: 15px 0; line-height: 1.8; }
+    .copyright a { color: #0ff; }
+    .heart { color: #f00; font-size: 16px; animation: heartbeat 1s ease-in-out infinite; display: inline-block; }
+
+    .badges-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+
+    a { color: #0ff; }
+    a:visited { color: #c6f; }
+    a:hover { color: #ff0; }
+
+    ::selection { background: #f0f; color: #000; }
+
+    ::-webkit-scrollbar { width: 16px; }
+    ::-webkit-scrollbar-track { background: #000033; border: 1px solid #336; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #669, #336); border: 2px outset #669; }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #77a, #447); }
+
+    .ascii-art { font-family: 'Courier New', monospace; color: #0f0; font-size: 10px; white-space: pre; line-height: 1.1; text-align: center; margin: 10px 0; }
+    .features-table { width: 100%; border-color: #669; }
+    .features-table td { background: #000033; border-color: #336; color: #0f0; font-size: 13px; padding: 6px; }
+    .features-table .feat-icon { font-size: 20px; text-align: center; width: 40px; }
+
+    #inva3d-bg-canvas { display: none; }
+    body.inva3d-mode #inva3d-bg-canvas { display: block !important; }
+
+    body.inva3d-mode { perspective: 1000px !important; }
+    body.inva3d-mode .main-wrapper { transform-style: preserve-3d !important; }
+
+    body.inva3d-mode .content-box {
+      transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+      transform: rotateY(0deg) rotateX(0deg) translateZ(0px) !important;
+    }
+    body.inva3d-mode .content-box:hover {
+      transform: rotateY(-6deg) rotateX(4deg) translateZ(50px) !important;
+      box-shadow: 15px 15px 0px #220044, 0 0 40px rgba(255,0,255,0.5) !important;
+      z-index: 100 !important;
+      position: relative !important;
+    }
+
+    body.inva3d-mode .header-section {
+      animation: inva3d-header-float 4s ease-in-out infinite !important;
+      transform-style: preserve-3d !important;
+    }
+    @keyframes inva3d-header-float {
+      0%, 100% { transform: rotateX(0deg) translateZ(0px); }
+      50% { transform: rotateX(3deg) translateZ(30px); }
+    }
+
+    body.inva3d-mode .nav-cell {
+      transition: transform 0.3s ease !important;
+    }
+    body.inva3d-mode .nav-cell:hover {
+      transform: translateZ(30px) scale(1.1) !important;
+    }
+
+    body.inva3d-mode .sidebar-box {
+      transform: rotateY(5deg) !important;
+      transform-origin: left center !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    body.inva3d-mode .integration-card {
+      transition: transform 0.3s ease !important;
+    }
+    body.inva3d-mode .integration-card:hover {
+      transform: rotateY(180deg) translateZ(20px) !important;
+    }
+
+    body.inva3d-mode .fake-award {
+      animation: inva3d-spin 6s linear infinite !important;
+    }
+    @keyframes inva3d-spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    body.inva3d-mode .gb-entry {
+      transition: transform 0.2s ease !important;
+    }
+    body.inva3d-mode .gb-entry:hover {
+      transform: translateZ(25px) rotateX(-3deg) scale(1.03) !important;
+    }
+
+    body.inva3d-mode .counter-digit {
+      transition: transform 0.2s ease !important;
+      display: inline-block !important;
+    }
+    body.inva3d-mode .counter-digit:hover {
+      transform: rotateX(360deg) !important;
+    }
+
+    body.inva3d-mode .mini-button {
+      transition: transform 0.3s ease !important;
+    }
+    body.inva3d-mode .mini-button:hover {
+      transform: rotateY(-20deg) translateZ(15px) !important;
+    }
+
+    body.inva3d-mode .webring-box {
+      animation: inva3d-wobble 3s ease-in-out infinite !important;
+    }
+    @keyframes inva3d-wobble {
+      0%, 100% { transform: rotateZ(0deg); }
+      25% { transform: rotateZ(1deg) translateZ(10px); }
+      75% { transform: rotateZ(-1deg) translateZ(10px); }
+    }
+
+    body.inva3d-mode .bottom-marquee,
+    body.inva3d-mode .top-marquee {
+      transform: rotateX(10deg) translateZ(20px) !important;
+      transform-origin: center bottom !important;
+    }
+
+    #inva3d-toggle-btn {
+      position: fixed;
+      top: 8px;
+      right: 8px;
+      z-index: 100000;
+      background: linear-gradient(180deg, #ff00ff, #990099);
+      color: #000;
+      border: 3px outset #ff66ff;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 6px 14px;
+      cursor: pointer;
+      text-shadow: 0 0 5px #fff;
+      box-shadow: 2px 2px 0px #330033;
+    }
+    #inva3d-toggle-btn:active { border-style: inset; }
+    #inva3d-toggle-btn.active {
+      background: linear-gradient(180deg, #00ff00, #009900);
+      border-color: #66ff66;
+      box-shadow: 0 0 15px #00ff00, 2px 2px 0px #003300;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <canvas id="inva3d-bg-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;"></canvas>
+  <button id="inva3d-toggle-btn">3D MODE</button>
+
+  <!-- TOP MARQUEE -->
+  <marquee behavior="scroll" direction="left" scrollamount="4" class="top-marquee">
+    <span class="rainbow-text">*** WeLcOmE 2 InVa3D - HoMe AuToMaTiOn FoR tHe InFoRmAtIoN sUpErHiGhWaY !!! *** YoU aRe ViSiToR nUmBeR <span id="visitor-count">013371</span> *** LaSt UpDaTeD: 05/02/1997 *** pOwErEd By PytHoN !!! ***</span>
+  </marquee>
+
+  <div class="main-wrapper">
+
+    <!-- HEADER -->
+    <div class="header-section">
+      <div class="ascii-art">
+ ___ _   ___     __    _____ ____
+|_ _| \ | \ \   / /_ _|___ /|  _ \
+ | ||  \| |\ \ / / _` | |_ \| | | |
+ | || |\  | \ V / (_| |___) | |_| |
+|___|_| \_|  \_/ \__,_|____/|____/
+      </div>
+      <h1 class="main-title blink">~*~ InVa3D ~*~</h1>
+      <h2 class="subtitle">HoMe AuToMaTiOn FoR tHe 21sT cEnTuRy!!!</h2>
+      <div class="divider-line"></div>
+      <p style="color:#0ff; font-size:14px; margin-top:8px;">
+        oPeN sOuRcE hOmE aUtOmAtIoN tHaT pUtS lOcAl CoNtRoL aNd PrIvAcY fIrSt!!!
+      </p>
+      <p class="best-viewed">BeSt ViEwEd At 800x600 rEsOlUtIoN wItH nEtScApE nAvIgAtOr 4.0 oR iNtErNeT eXpLoReR 4.0</p>
+    </div>
+
+    <!-- NAVIGATION -->
+    <table class="nav-table" cellpadding="8" cellspacing="3" border="3">
+      <tr>
+        <td class="nav-cell"><a href="#home" class="nav-link">&#127968; HoMe</a></td>
+        <td class="nav-cell"><a href="#features" class="nav-link">&#9889; FeAtUrEs</a></td>
+        <td class="nav-cell"><a href="#integrations" class="nav-link">&#128268; InTeGrAtIoNs</a></td>
+        <td class="nav-cell"><a href="#install" class="nav-link">&#128190; InStAlL</a></td>
+        <td class="nav-cell"><a href="#guestbook" class="nav-link">&#128214; GuEsTbOoK</a></td>
+      </tr>
+    </table>
+
+    <!-- 3 COLUMN LAYOUT -->
+    <table class="content-table" cellpadding="10" cellspacing="5" border="2">
+      <tr>
+        <!-- LEFT SIDEBAR -->
+        <td class="sidebar" valign="top" width="180">
+          <div class="sidebar-box">
+            <h3 class="sidebar-title blink">WeBrInGs</h3>
+            <div class="webring-nav">
+              <a href="#">&lt;&lt; PrEv</a> |
+              <a href="#">RaNdOm</a> |
+              <a href="#">NeXt &gt;&gt;</a>
+            </div>
+            <hr class="rainbow-hr">
+            <h3 class="sidebar-title">PrOjEcT sTaTs</h3>
+            <p class="stats-text">&#9733; StArS: 9001+</p>
+            <p class="stats-text">&#128100; CoNtRiBs: 1000+</p>
+            <p class="stats-text">&#128268; InTeGrAtIoNs: 2800+</p>
+            <p class="stats-text">SiNcE: 2013</p>
+            <hr class="rainbow-hr">
+            <h3 class="sidebar-title">AwArDs</h3>
+            <div class="award-box">
+              <div class="fake-award">&#127942;<br>COOL<br>SITE<br>1997</div>
+            </div>
+            <div class="award-box">
+              <div class="fake-award hot">&#128293;<br>HOT<br>IoT!</div>
+            </div>
+            <hr class="rainbow-hr">
+            <div class="button-88x31"><div class="mini-button ha">HOME<br>ASSISTANT</div></div>
+            <div class="button-88x31"><div class="mini-button ie">IE 4.0<br>NOW!</div></div>
+            <div class="button-88x31"><div class="mini-button ns">NETSCAPE<br>NOW!</div></div>
+            <div class="button-88x31"><div class="mini-button free">OPEN<br>SOURCE</div></div>
+          </div>
+        </td>
+
+        <!-- MAIN CONTENT -->
+        <td class="main-content" valign="top">
+
+          <!-- WELCOME -->
+          <div class="content-box" id="home">
+            <h2 class="section-title">~*~ WeLcOmE 2 InVa3D !!! ~*~</h2>
+            <div class="construction-banner">
+              <span class="construction-icon">&#9888;&#65039;</span>
+              <span class="blink construction-text">!! UnDeR cOnStRuCtIoN !!</span>
+              <span class="construction-icon">&#9888;&#65039;</span>
+            </div>
+            <p>
+              WeLcOmE 2 <b>InVa3D</b> - a FoRk Of <b>hOmE aSsIsTaNt</b>!!!
+              ThIs Is ThE mOsT RADICAL hOmE aUtOmAtIoN sOfTwArE oN tHe
+              iNfOrMaTiOn SuPeRhIgHwAy!!! &#127918;
+            </p>
+            <p>
+              AuToMaTe YoUr CrIb WiTh oVeR 2800+ iNtEgRaTiOnS!!!
+              SmArT lIgHtS, tHeRmOsTaTs, SeCuRiTy CaMeRaS - u NaMe It!!!
+              <span class="blink">ALL FREE!!!</span>
+            </p>
+            <marquee behavior="alternate" scrollamount="2">
+              <span class="fire-text">*** POWERED BY PYTHON - THE RADDEST LANGUAGE EVER ***</span>
+            </marquee>
+          </div>
+
+          <!-- FEATURES -->
+          <div class="content-box" id="features">
+            <h2 class="section-title">&#9889; RaDiCaL fEaTuReS &#9889;</h2>
+            <table class="features-table" cellpadding="5" cellspacing="2" border="1">
+              <tr>
+                <td class="feat-icon">&#127968;</td>
+                <td><b style="color:#0ff">LoCAL CoNTRoL</b> - nO cLoUd ReQuIrEd!!! KeEp Ur DaTa PrIvAtE!!!</td>
+              </tr>
+              <tr>
+                <td class="feat-icon">&#128268;</td>
+                <td><b style="color:#0ff">2800+ iNtEgRaTiOnS</b> - eVeRy SmArT dEvIcE u CaN iMaGiNe!!!</td>
+              </tr>
+              <tr>
+                <td class="feat-icon">&#9889;</td>
+                <td><b style="color:#0ff">AuToMaTiOnS</b> - mAkE Ur HoUsE tHiNk FoR iTsElF!!!</td>
+              </tr>
+              <tr>
+                <td class="feat-icon">&#128187;</td>
+                <td><b style="color:#0ff">DaShBoArDs</b> - cOoL UI tO cOnTrOl EvErYtHiNg!!!</td>
+              </tr>
+              <tr>
+                <td class="feat-icon">&#128272;</td>
+                <td><b style="color:#0ff">PrIvAcY fIrSt</b> - Ur DaTa StAyS aT hOmE!!!</td>
+              </tr>
+              <tr>
+                <td class="feat-icon">&#127987;</td>
+                <td><b style="color:#0ff">OpEn SoUrCe</b> - fReEdOm 4 aLl!!! GPL LiCeNsE!!!</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- INTEGRATIONS -->
+          <div class="content-box" id="integrations">
+            <h2 class="section-title">&#128268; CoOl InTeGrAtIoNs!!! &#128268;</h2>
+            <p>HeRe ArE sOmE oF tHe RaDdEsT iNtEgRaTiOnS wE sUpPoRt!!!</p>
+            <div class="integration-grid">
+              <div class="integration-card"><span class="integration-icon">&#128161;</span>PhILiPs HuE</div>
+              <div class="integration-card"><span class="integration-icon">&#127777;</span>NeSt</div>
+              <div class="integration-card"><span class="integration-icon">&#128265;</span>AlExA</div>
+              <div class="integration-card"><span class="integration-icon">&#127916;</span>PlEx</div>
+              <div class="integration-card"><span class="integration-icon">&#128274;</span>Z-wAvE</div>
+              <div class="integration-card"><span class="integration-icon">&#128225;</span>ZiGbEe</div>
+              <div class="integration-card"><span class="integration-icon">&#127777;</span>eCoBEe</div>
+              <div class="integration-card"><span class="integration-icon">&#128249;</span>RiNg</div>
+              <div class="integration-card"><span class="integration-icon">&#128187;</span>MQTT</div>
+              <div class="integration-card"><span class="integration-icon">&#9729;</span>wEaThEr</div>
+              <div class="integration-card"><span class="integration-icon">&#127926;</span>SoNoS</div>
+              <div class="integration-card"><span class="integration-icon">&#128295;</span>ESPHome</div>
+            </div>
+            <p style="text-align:center"><a href="#">...AnD 2800+ mOrE!!!</a></p>
+          </div>
+
+          <!-- INSTALL -->
+          <div class="content-box" id="install">
+            <h2 class="section-title">&#128190; HoW 2 iNsTaLl!!! &#128190;</h2>
+            <p>iTs SuPeR eAsY dUdE!!! JuSt FoLlOw ThEsE sTePz:</p>
+            <table class="about-table" cellpadding="5" cellspacing="0" border="1">
+              <tr>
+                <td class="about-label">StEp 1:</td>
+                <td>gEt A rAsPbErRy Pi (oR aNy CoMpUtEr!!!)</td>
+              </tr>
+              <tr>
+                <td class="about-label">StEp 2:</td>
+                <td>iNsTaLl PytHoN 3.13+</td>
+              </tr>
+              <tr>
+                <td class="about-label">StEp 3:</td>
+                <td><code style="color:#ff0;background:#000;padding:2px 6px;border:1px inset #666;">pip install homeassistant</code></td>
+              </tr>
+              <tr>
+                <td class="about-label">StEp 4:</td>
+                <td><code style="color:#ff0;background:#000;padding:2px 6px;border:1px inset #666;">hass</code></td>
+              </tr>
+              <tr>
+                <td class="about-label">StEp 5:</td>
+                <td><span class="blink" style="color:#f0f">PROFIT!!!</span></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- GUESTBOOK -->
+          <div class="content-box" id="guestbook">
+            <h2 class="section-title">&#128214; SiGn My GuEsTbOoK!!! &#128214;</h2>
+            <p>LeAvE a MeSsAgE 4 tHe WeBmAsTeR!!!</p>
+
+            <form class="guestbook-form" onsubmit="signGuestbook(event)">
+              <table cellpadding="4" cellspacing="2" border="1" class="form-table">
+                <tr>
+                  <td class="form-label">NaMe:</td>
+                  <td><input type="text" id="gb-name" class="retro-input" size="30"></td>
+                </tr>
+                <tr>
+                  <td class="form-label">EmAiL:</td>
+                  <td><input type="email" id="gb-email" class="retro-input" size="30"></td>
+                </tr>
+                <tr>
+                  <td class="form-label">HoMePaGe:</td>
+                  <td><input type="text" id="gb-url" class="retro-input" size="30" value="http://"></td>
+                </tr>
+                <tr>
+                  <td class="form-label">MeSsAgE:</td>
+                  <td><textarea id="gb-message" class="retro-input" rows="4" cols="30"></textarea></td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="center">
+                    <input type="submit" value="SiGn It!!!" class="retro-button">
+                    <input type="reset" value="CLeAr" class="retro-button">
+                  </td>
+                </tr>
+              </table>
+            </form>
+
+            <div id="guestbook-entries">
+              <div class="gb-entry">
+                <p class="gb-meta">&#128172; <b>xX_SmArThOmE_Xx</b> - 04/28/1997</p>
+                <p class="gb-text">JuSt AuToMaTeD mY eNtIrE hOuSe!!! ThIs RuLeZzZ!!!</p>
+              </div>
+              <div class="gb-entry">
+                <p class="gb-meta">&#128172; <b>~*RaSpBeRrY_pI_fAn*~</b> - 04/15/1997</p>
+                <p class="gb-text">RuNnInG tHiS oN mY Pi AnD iT wOrKs GrEaT!!! A+++</p>
+              </div>
+              <div class="gb-entry">
+                <p class="gb-meta">&#128172; <b>IoT_MaStEr_99</b> - 03/22/1997</p>
+                <p class="gb-text">FiNaLlY a HoMe AuToMaTiOn ThAt DoEsNt NeEd ThE cLoUd!!! RADICAL!!!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDI -->
+          <div class="content-box midi-box">
+            <h3 class="section-title">&#127925; NoW pLaYiNg &#127925;</h3>
+            <marquee direction="right" scrollamount="2" class="midi-name">&#127926; hamster_dance.mid &#127926;</marquee>
+            <div class="midi-controls">
+              <button class="retro-button midi-btn" onclick="toggleMusic()">&#9654; PLAY / &#9632; STOP</button>
+            </div>
+          </div>
+        </td>
+
+        <!-- RIGHT SIDEBAR -->
+        <td class="sidebar" valign="top" width="180">
+          <div class="sidebar-box">
+            <h3 class="sidebar-title">ViSiToR #</h3>
+            <div class="counter-display">
+              <span class="counter-digit">0</span>
+              <span class="counter-digit">1</span>
+              <span class="counter-digit">3</span>
+              <span class="counter-digit">3</span>
+              <span class="counter-digit">7</span>
+              <span class="counter-digit">1</span>
+            </div>
+            <hr class="rainbow-hr">
+
+            <h3 class="sidebar-title">&#128227; WhAtS nEw</h3>
+            <ul class="whats-new">
+              <li><span class="blink new-icon">NEW!</span> GuEsTbOoK!</li>
+              <li><span class="new-icon">NEW!</span> 90s ThEmE!</li>
+              <li>MoRe InTeGrAtIoNs!</li>
+              <li>MiDi MuSiC aDdEd!</li>
+              <li>FiXeD aLl BuGs*</li>
+            </ul>
+            <p style="font-size:8px;color:#555;text-align:center">*nOt ReAlLy</p>
+            <hr class="rainbow-hr">
+
+            <h3 class="sidebar-title">&#128344; ClOcK</h3>
+            <div class="clock-display" id="retro-clock">00:00:00</div>
+            <hr class="rainbow-hr">
+
+            <h3 class="sidebar-title">&#128187; SyStEm ReQs</h3>
+            <ul class="whats-new">
+              <li>PytHoN 3.13+</li>
+              <li>RaSpBeRrY Pi</li>
+              <li>486 DX2 66mHz</li>
+              <li>16mB rAm</li>
+              <li>28.8k MoDeM</li>
+            </ul>
+            <hr class="rainbow-hr">
+
+            <h3 class="sidebar-title">&#128175; ToP sItEs</h3>
+            <ol class="top-sites">
+              <li><a href="#">yAhOo!</a></li>
+              <li><a href="#">gEoCiTiEs</a></li>
+              <li><a href="#">aLtAvIsTa</a></li>
+              <li><a href="#">aNgElFiRe</a></li>
+              <li><a href="#">tRiPoD</a></li>
+            </ol>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- BOTTOM -->
+    <div class="bottom-section">
+      <div class="divider-line"></div>
+
+      <div id="webring" class="webring-box">
+        <h3 style="color:#aaa">ThIs SiTe Is A pRoUd MeMbEr Of ThE</h3>
+        <h2 class="webring-title rainbow-text">*** HoMe AuToMaTiOn WeBrInG ***</h2>
+        <div class="webring-nav-bottom">
+          <a href="#" class="webring-link">[&lt;&lt; PrEv]</a>
+          <a href="#" class="webring-link">[LiSt]</a>
+          <a href="#" class="webring-link">[RaNdOm]</a>
+          <a href="#" class="webring-link">[NeXt &gt;&gt;]</a>
+        </div>
+      </div>
+
+      <div class="email-banner">
+        <p>&#128231; gOt QuEsTiOnS? EmAiL <a href="mailto:webmaster@inva3d.geocities.com">wEbMaStEr@iNvA3d.GeOcItIeS.CoM</a> &#128231;</p>
+      </div>
+
+      <p class="copyright">
+        &copy; 1997 InVa3D TeAm. AlL rIgHtS rEsErVeD.<br>
+        FoRkEd WiTh <span class="heart">&hearts;</span> fRoM hOmE aSsIsTaNt<br>
+        MaDe iN nOtEpAd.ExE | PrOuDlY hOsTeD oN gEoCiTiEs
+      </p>
+
+      <div class="badges-row">
+        <div class="mini-button ha">HOME<br>ASSISTANT</div>
+        <div class="mini-button anarchy">LINUX<br>INSIDE</div>
+        <div class="mini-button notepad">MADE WITH<br>NOTEPAD</div>
+        <div class="mini-button y2k">Y2K<br>READY!</div>
+        <div class="mini-button noframes">NO<br>FRAMES!</div>
+        <div class="mini-button hackers">PYTHON<br>POWERED</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM MARQUEE -->
+  <marquee behavior="scroll" direction="right" scrollamount="3" class="bottom-marquee">
+    <span class="rainbow-text">*** tHaNkS 4 vIsItInG InVa3D !!! *** dOnT 4gEt 2 BoOkMaRk (cTrL+D) !!! *** SiGn tHe GuEsTbOoK !!! *** CoMe BaCk SoOn !!! *** TeLl Ur FrIeNdS !!! ***</span>
+  </marquee>
+
+  <script>
+    var canvas = document.getElementById('starfield');
+    var ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var bgCanvas = document.getElementById('inva3d-bg-canvas');
+    var bgCtx = bgCanvas.getContext('2d');
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = window.innerHeight;
+
+    window.addEventListener('resize', function(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+      if(stars3d.length) init3dStars();
+    });
+
+    var particles = [];
+    var colors = ['#ff0','#f0f','#0ff','#0f0','#f00','#fff','#f60'];
+
+    document.addEventListener('mousemove', function(e){
+      for(var i=0;i<3;i++){
+        particles.push({
+          x:e.clientX+(Math.random()-.5)*10,
+          y:e.clientY+(Math.random()-.5)*10,
+          size:Math.random()*4+1,
+          color:colors[Math.floor(Math.random()*colors.length)],
+          life:1,
+          vx:(Math.random()-.5)*2,
+          vy:(Math.random()-.5)*2-1,
+          shape:Math.random()>.5?'star':'circle'
+        });
+      }
+    });
+
+    function drawStar(x,y,size,color){
+      ctx.save();ctx.translate(x,y);ctx.rotate(Date.now()/200);
+      ctx.beginPath();
+      for(var i=0;i<5;i++){
+        ctx.lineTo(Math.cos((18+i*72)*Math.PI/180)*size,-Math.sin((18+i*72)*Math.PI/180)*size);
+        ctx.lineTo(Math.cos((54+i*72)*Math.PI/180)*size*.4,-Math.sin((54+i*72)*Math.PI/180)*size*.4);
+      }
+      ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.restore();
+    }
+
+    function animateParticles(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(var i=particles.length-1;i>=0;i--){
+        var p=particles[i];
+        p.x+=p.vx;p.y+=p.vy;p.life-=.02;p.size*=.98;
+        if(p.life<=0){particles.splice(i,1);continue;}
+        ctx.globalAlpha=p.life;
+        if(p.shape==='star'){drawStar(p.x,p.y,p.size,p.color);}
+        else{ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill();}
+      }
+      ctx.globalAlpha=1;
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    function updateClock(){
+      var now=new Date();
+      document.getElementById('retro-clock').textContent =
+        String(now.getHours()).padStart(2,'0')+':'+
+        String(now.getMinutes()).padStart(2,'0')+':'+
+        String(now.getSeconds()).padStart(2,'0');
+    }
+    setInterval(updateClock,1000);
+    updateClock();
+
+    function signGuestbook(e){
+      e.preventDefault();
+      var name=document.getElementById('gb-name').value||'AnOnYmOuS';
+      var message=document.getElementById('gb-message').value||'CoOl SiTe!!!';
+      var entry=document.createElement('div');
+      entry.className='gb-entry';
+      var now=new Date();
+      var date=String(now.getMonth()+1).padStart(2,'0')+'/'+
+               String(now.getDate()).padStart(2,'0')+'/'+now.getFullYear();
+      entry.innerHTML='<p class="gb-meta">\u{1F4AC} <b>'+name.replace(/</g,'&lt;')+
+        '</b> - '+date+'</p><p class="gb-text">'+message.replace(/</g,'&lt;')+'</p>';
+      var entries=document.getElementById('guestbook-entries');
+      entries.insertBefore(entry,entries.firstChild);
+      e.target.reset();
+      document.getElementById('gb-url').value='http://';
+      alert('ThAnKs 4 SiGnInG mY gUeStBoOk!!!');
+    }
+
+    var count=13371;
+    setInterval(function(){
+      count++;
+      document.getElementById('visitor-count').textContent=String(count).padStart(6,'0');
+    },30000);
+
+    document.addEventListener('contextmenu',function(e){
+      if(Math.random()<0.3){
+        e.preventDefault();
+        alert('hEy!!! nO sTeAlInG mY hTmL sOuRcE cOdE!!!');
+      }
+    });
+
+    var stars3d=[];
+    var is3d=false;
+    var STAR_COUNT=500;
+    var SPEED=3;
+
+    function init3dStars(){
+      stars3d=[];
+      for(var i=0;i<STAR_COUNT;i++){
+        stars3d.push({
+          x:(Math.random()-.5)*bgCanvas.width*2,
+          y:(Math.random()-.5)*bgCanvas.height*2,
+          z:Math.random()*bgCanvas.width
+        });
+      }
+    }
+
+    function animate3dStarfield(){
+      if(!is3d) return;
+      bgCtx.fillStyle='rgba(0,0,40,0.25)';
+      bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+      var cx=bgCanvas.width/2, cy=bgCanvas.height/2;
+      for(var i=0;i<stars3d.length;i++){
+        var s=stars3d[i];
+        s.z-=SPEED;
+        if(s.z<=0){
+          s.x=(Math.random()-.5)*bgCanvas.width*2;
+          s.y=(Math.random()-.5)*bgCanvas.height*2;
+          s.z=bgCanvas.width;
+        }
+        var sx=(s.x/s.z)*300+cx;
+        var sy=(s.y/s.z)*300+cy;
+        var r=Math.max(0,(1-s.z/bgCanvas.width)*3.5);
+        var bright=Math.max(0,(1-s.z/bgCanvas.width));
+        var hue=(Date.now()/15+i*3)%360;
+        bgCtx.beginPath();
+        bgCtx.arc(sx,sy,r,0,Math.PI*2);
+        bgCtx.fillStyle='hsla('+hue+',100%,70%,'+bright+')';
+        bgCtx.fill();
+        if(r>1.2){
+          bgCtx.beginPath();
+          bgCtx.moveTo(sx,sy);
+          var px=((s.x/(s.z+SPEED*5))*300)+cx;
+          var py=((s.y/(s.z+SPEED*5))*300)+cy;
+          bgCtx.lineTo(px,py);
+          bgCtx.strokeStyle='hsla('+hue+',100%,70%,'+(bright*0.4)+')';
+          bgCtx.lineWidth=r*0.5;
+          bgCtx.stroke();
+        }
+      }
+      requestAnimationFrame(animate3dStarfield);
+    }
+
+    var btn=document.getElementById('inva3d-toggle-btn');
+    btn.addEventListener('click',function(){
+      is3d=!is3d;
+      document.body.classList.toggle('inva3d-mode',is3d);
+      btn.classList.toggle('active',is3d);
+      btn.textContent=is3d?'3D MODE ON':'3D MODE';
+      if(is3d){
+        if(!stars3d.length) init3dStars();
+        bgCtx.fillStyle='#000028';
+        bgCtx.fillRect(0,0,bgCanvas.width,bgCanvas.height);
+        animate3dStarfield();
+      } else {
+        bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
+      }
+    });
+  </script>
+</body>
+</html>
